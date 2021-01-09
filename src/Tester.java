@@ -68,21 +68,28 @@ public class Tester {
             for(int i = 0; i < numTimesToAddVaccines ; i++){
               Supplier sup = suppliers.get((int)(Math.random()*(suppliers.size()-1)+1));
               String supplierName = sup.getName();
-              int numSupplyToAdd = (int)(Math.random()*30+10);
+              int numSupplyToAdd = (int)(Math.random()*60+30);
               String temp = supplierName+","+numSupplyToAdd+","+new SimpleDateFormat("yyyy-MM-"+(sizeVaccines++)).format(Calendar.getInstance().getTime());
               orders+=(temp)+("\n");
             }
 
             //Send supply
+            int totalSupply = 0;
+            for(Vaccine current : vaccines)
+                totalSupply+=current.getQuantity();
+
             int numTimesToSendSupply = ((int) (Math.random() * clinics.size())+1);
 
             for(int i = 0; i < numTimesToSendSupply ; i++){
                 Clinic clnc = clinics.get((int)(Math.random()*(clinics.size()-1)+1));
                 String clinicName = clnc.getLoc();
                 int numSupplyToSend = (int)((int)(Math.random()*(clnc.getDemand())+2));
-                String temp = clinicName+","+numSupplyToSend;
-                orders += (temp)+("\n");
-                clnc.decreaseDemand(clnc.getDemand()-numSupplyToSend-1);
+                if(totalSupply > numSupplyToSend) {
+                    String temp = clinicName + "," + numSupplyToSend;
+                    orders += (temp) + ("\n");
+                    clnc.decreaseDemand(clnc.getDemand() - numSupplyToSend - 1);
+                    totalSupply = totalSupply - numSupplyToSend;
+                }
             }
 
             Files.write(Paths.get("orders.txt"), orders.toString().getBytes());
@@ -170,11 +177,9 @@ public class Tester {
 
             int currentTest = 1;
             for (String s : readTests) {
-                System.out.println(s);
-
-                JSONObject test = new JSONObject(s);
+                JSONObject test   = new JSONObject(s);
                 String configFile = (String) test.get("configFile");
-                String orderFile = (String) test.get("orderFile");
+                String orderFile  = (String) test.get("orderFile");
                 writeToFile(configFile,"config.txt");
                 writeToFile(orderFile,"orders.txt");
 
