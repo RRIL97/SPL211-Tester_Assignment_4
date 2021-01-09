@@ -14,6 +14,11 @@ sqlite-jdbc-3.8.11.2.jar
 To use simply put main.py into the tester folder.
 
 
+
+Last update
+09/01/21
+
+
 ------------------
 Check list
 
