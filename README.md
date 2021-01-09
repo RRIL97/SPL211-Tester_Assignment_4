@@ -16,7 +16,7 @@ To use simply put main.py into the tester folder.
 
 
 Last update
-09/01/21
+09/01/21 22:53 - Fixed tests.txt bug
 
 
 ------------------
