@@ -10,7 +10,7 @@ public class Clinic {
 
     public Clinic(int id, int numLogistics){
         this.id                = id;
-        location               = "CLINIC_"+UUID.randomUUID().toString().substring(0,2);
+        location               = "CLINIC_"+UUID.randomUUID().toString().substring(0,6);
         this.demand            = (int )(Math.random() * 200 + 100);
         this.logistic          = (int )(Math.random() * numLogistics + 1);
     }
