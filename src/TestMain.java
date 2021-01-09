@@ -1,8 +1,5 @@
 import org.json.JSONObject;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+ 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,6 +10,8 @@ public class TestMain {
 
 
 
+    public static int numSuccessTest = 0;
+    public static int numFailedTests = 0;
     public static void main(String [] args)
     {
 
@@ -25,7 +24,7 @@ public class TestMain {
          if(option == 1) {
              ArrayList<String> testCasesGenerated = new ArrayList<>();
 
-             for (int i = 0; i < 30; i++) {
+             for (int i = 0; i < 100; i++) {
                  System.out.println("Generated Test Number " + i );
                  Tester s = new Tester();
                  s.generateConfig();
@@ -40,6 +39,8 @@ public class TestMain {
 
             Tester testRunner = new Tester();
             testRunner.runTests();
+            System.out.println("Passed | " + numSuccessTest);
+            System.out.println("Failed | " + numFailedTests);
          }
          }catch(Exception e){
          e.printStackTrace();
