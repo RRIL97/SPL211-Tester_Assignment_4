@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -5,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,7 +34,7 @@ public class Tester {
             config+=(format)+("\n");
 
             for(int i = 1; i <= numVaccines; i ++) {
-                Vaccine vac = new Vaccine(i, numSuppliers);
+                Vaccine vac = new Vaccine(i, numSuppliers-1);
                 vaccines.add(vac);
                 config+=vac.toString()+("\n");
             }
