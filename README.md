@@ -12,3 +12,9 @@ sqlite-jdbc-3.8.11.2.jar
 ------------------
 
 To use simply put main.py into the tester folder.
+
+
+------------------
+Check list
+
+1) Add param support as required by the TA's
