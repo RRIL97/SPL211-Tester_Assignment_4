@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -58,20 +57,28 @@ public class Tester {
             e.printStackTrace();
         }
     }
+    public String addOrders(){
+        String supply = "";
+
+        int sizeVaccines = vaccines.size();
+        int numTimesToAddVaccines = ((int) (Math.random() * 6)+1);
+        for(int i = 0; i < numTimesToAddVaccines ; i++){
+            Supplier sup = suppliers.get((int)(Math.random()*(suppliers.size()-1)+1));
+            String supplierName = sup.getName();
+            int numSupplyToAdd = (int)(Math.random()*60+30);
+            String temp = supplierName+","+numSupplyToAdd+","+new SimpleDateFormat("yyyy-MM-"+(sizeVaccines++)).format(Calendar.getInstance().getTime());
+            supply+=(temp)+("\n");
+        }
+
+        return supply;
+
+    }
     public void generateOrders(){
         try {
             orders = "";
-            int sizeVaccines = vaccines.size();
 
             //Adds supply
-            int numTimesToAddVaccines = ((int) (Math.random() * 6)+1);
-            for(int i = 0; i < numTimesToAddVaccines ; i++){
-              Supplier sup = suppliers.get((int)(Math.random()*(suppliers.size()-1)+1));
-              String supplierName = sup.getName();
-              int numSupplyToAdd = (int)(Math.random()*60+30);
-              String temp = supplierName+","+numSupplyToAdd+","+new SimpleDateFormat("yyyy-MM-"+(sizeVaccines++)).format(Calendar.getInstance().getTime());
-              orders+=(temp)+("\n");
-            }
+           orders+=addOrders();
 
             //Send supply
             int totalSupply = 0;
@@ -126,7 +133,7 @@ public class Tester {
             File db = new File("database.db");
             if (db.exists())
                 db.delete();
-            Process p = Runtime.getRuntime().exec("python main.py");
+            Process p = Runtime.getRuntime().exec("python main.py config.txt orders.txt output.txt");
             p.waitFor();
 
             Class.forName("org.sqlite.JDBC");
@@ -207,3 +214,4 @@ public class Tester {
         }
     }
 }
+
