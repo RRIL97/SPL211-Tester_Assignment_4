@@ -179,8 +179,19 @@ public class Tester {
         }
     }
     boolean resultEqual(JSONObject first ,JSONObject second){
-       System.out.println("Test | " + first.toString()+"\nYours | "+second);
-       return first.similar(second);
+
+       String firstStr = first.toString();
+       String secondStr = second.toString();
+
+       for(int i = 1 ;i < 10 ; i++) {
+           firstStr = firstStr.replaceAll("2021-01-"+i, "2021-01-0"+i);
+           secondStr = secondStr.replaceAll("2021-01-"+i, "2021-01-0"+i);
+       }
+       firstStr = firstStr.replaceAll("\\\\\\\\n", "");
+       secondStr = secondStr.replaceAll("\\\\\\\\n", "");
+ 
+       System.out.println(firstStr.toString()+"\n"+secondStr);
+        return firstStr.equals(secondStr);
     }
 
     void runTests(){
