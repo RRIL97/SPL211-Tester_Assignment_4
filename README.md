@@ -16,7 +16,9 @@ To use simply put main.py into the tester folder.
 
 
 Last update
-10/1/21 9:04 - Param support added
+12/01/21 Uploaded a new file with randomized dates.
+
+~~10/1/21 9:04 - Param support added~~
 
 ~~09/01/21 22:53 - Fixed tests.txt bug~~
 
