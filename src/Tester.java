@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -7,6 +8,8 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -35,8 +38,11 @@ public class Tester {
             for(int i = 1; i <= numVaccines; i ++) {
                 Vaccine vac = new Vaccine(i, numSuppliers-1);
                 vaccines.add(vac);
-                config+=vac.toString()+("\n");
             }
+            Collections.shuffle(vaccines);
+            for(int i = 0 ; i < vaccines.size() ; i++)
+                config+=vaccines.get(i).toString()+("\n");
+
             for(int i = 0; i < numSuppliers; i ++) {
                 Supplier sup =  new Supplier(i, numLogistics);
                 suppliers.add(sup);
@@ -60,7 +66,7 @@ public class Tester {
     public String addOrders(){
         String supply = "";
 
-        int sizeVaccines = vaccines.size();
+        int sizeVaccines = vaccines.size()+1;
         int numTimesToAddVaccines = ((int) (Math.random() * 6)+1);
         for(int i = 0; i < numTimesToAddVaccines ; i++){
             Supplier sup = suppliers.get((int)(Math.random()*(suppliers.size()-1)+1));
@@ -76,7 +82,6 @@ public class Tester {
     public void generateOrders(){
         try {
             orders = "";
-
             //Adds supply
            orders+=addOrders();
 
@@ -115,7 +120,8 @@ public class Tester {
                 JSONObject obj = new JSONObject();
                 for (int i = 1; i <= numColumns; i++) {
                     String column_name = rsmd.getColumnName(i);
-                    obj.put(column_name, rs.getObject(column_name));
+                    Object t_Obj = rs.getObject(column_name);
+                    obj.put(column_name,t_Obj);
                 }
                 json.put(obj);
             }
@@ -205,6 +211,7 @@ public class Tester {
                 else {
                     TestMain.numFailedTests++;
                     System.out.println("Failed Test " + currentTest);
+                    System.exit(0);
 
                 }currentTest++;
                 System.out.println("----------------------" );
@@ -214,4 +221,3 @@ public class Tester {
         }
     }
 }
-
