@@ -16,8 +16,9 @@ To use simply put main.py into the tester folder.
 
 
 Last update
+13/01/21 Added small update to handle more cases. (thanks to those who contributed)
 
-12/01/21 - Fixed \n bug
+~~12/01/21 - Fixed \n bug~~
 
 ~~12/01/21 Uploaded a new file with randomized dates.~~
 
