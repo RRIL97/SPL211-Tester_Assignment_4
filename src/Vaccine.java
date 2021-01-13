@@ -4,14 +4,14 @@ import java.util.Calendar;
 public class Vaccine {
 
 
-    private final int id;
+    private final String id;
     private String generatedDate;
     private int supplier;
     private int quantity;
     private final int numSuppliers;
 
     public Vaccine(int id,int numSuppliers){
-        this.id = id;
+        this.id = (id < 10 ? "0" : "") + id;
         this.numSuppliers = numSuppliers;
         generateValues();
     }
